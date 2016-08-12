@@ -15,7 +15,7 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 FORMAT = '%(asctime)-15s init %(levelname)s: %(message)s'
-logging.basicConfig(level=logging.DEBUG, format=FORMAT)
+logging.basicConfig(level=logging.INFO, format=FORMAT)
 logger = logging.getLogger()
 
 selfp = psutil.Process()
@@ -26,12 +26,10 @@ logger.debug("my pid: %d", selfp.pid)
 # descendants.
 
 def sendtoall(signum, frame):
-    logger.debug("caught signal %d", signum)
     for ch in selfp.children(recursive=True):
         os.kill(ch.pid, signum)
 
 def sendtochilds(signum, frame):
-    logger.debug("caught signal %d", signum)
     for ch in selfp.children(recursive=False):
         os.kill(ch.pid, signum)
 
