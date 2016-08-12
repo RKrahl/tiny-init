@@ -24,8 +24,19 @@ System requirements
 Installation
 ------------
 
-Just drop the `init.py` in an appropriate directory in your system
-path.
+This package uses the distutils Python standard library package and
+follows its conventions of packaging source distributions.  See the
+documentation on `Installing Python Modules`_ for details or to
+customize the install process.  You typically want to install the init
+script into a system binary directory, use `--install-scripts` to
+override the default.
+
+  1. Download the sources, unpack, and change into the source
+     directory.
+
+  2. Install::
+
+       $ python setup.py install --install-scripts /usr/local/sbin
 
 
 Copyright and License
@@ -48,3 +59,4 @@ permissions and limitations under the License.
 
 
 .. _psutil: https://pypi.python.org/pypi/psutil/
+.. _Installing Python Modules: https://docs.python.org/2.7/install/
