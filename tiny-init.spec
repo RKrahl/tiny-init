@@ -33,7 +33,7 @@ python setup.py build
 
 %install
 python setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-scripts=%{_sbindir}
-%__mv %{buildroot}%{_sbindir}/init.py %{buildroot}%{_sbindir}/init
+%__mv %{buildroot}%{_sbindir}/init.py %{buildroot}%{_sbindir}/tiny-init
 
 
 %clean
@@ -43,7 +43,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %exclude %{python_sitelib}/*
-%{_sbindir}/init
+%{_sbindir}/tiny-init
 
 
 %changelog
