@@ -7,7 +7,11 @@ Group:		System/Base
 Source:		%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python-devel >= 2.6
+%if 0%{?suse_version}
 Requires:	python-base >= 2.6
+%else
+Requires:	python >= 2.6
+%endif
 Requires:	python-psutil >= 2.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
