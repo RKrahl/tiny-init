@@ -16,9 +16,9 @@ containers.
 System requirements
 -------------------
 
- + Python 2.6, 2.7, or 3.1 and newer.
++ Python 2.6, 2.7, or 3.1 and newer.
 
- + `psutil`_ >= 2.0
++ `psutil`_ >= 2.0
 
 
 Installation
@@ -31,12 +31,12 @@ customize the install process.  You typically want to install the init
 script into a system binary directory, use `--install-scripts` to
 override the default.
 
-  1. Download the sources, unpack, and change into the source
-     directory.
+1. Download the sources, unpack, and change into the source
+   directory.
 
-  2. Install::
+2. Install::
 
-       $ python setup.py install --install-scripts /usr/local/sbin
+     $ python setup.py install --install-scripts /usr/local/sbin
 
 
 Copyright and License
