@@ -1,18 +1,27 @@
+%if 0%{?centos_version} || 0%{?rhel_version}
+%global python3_pkgversion 34
+%global py3_ver 3.4
+%else
+%global python3_pkgversion 3
+%global __python3 python3
+%if 0%{?fedora_version}
+%global py3_ver %(%{__python3} -c "import sys; sys.stdout.write(sys.version[:3])"
+)
+%endif
+%endif
+
+
 Name:		tiny-init
 Version:	0.1
-Release:	1
+Release:	2
 Summary:	Minimal implementation of an init process
 License:	Apache-2.0
 Group:		System/Base
 Source:		%{name}-%{version}.tar.gz
 BuildArch:	noarch
-BuildRequires:	python-devel >= 2.6
-%if 0%{?suse_version}
-Requires:	python-base >= 2.6
-%else
-Requires:	python >= 2.6
-%endif
-Requires:	python-psutil >= 2.0
+BuildRequires:	python%{python3_pkgversion}-devel
+Requires:	python(abi) = %{py3_ver}
+Requires:	python%{python3_pkgversion}-psutil >= 2.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
 %description
@@ -28,11 +37,11 @@ terminated.  If the last child process is gone, it terminates itself.
 
 
 %build
-python setup.py build
+%__python3 setup.py build
 
 
 %install
-python setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-scripts=%{_sbindir}
+%__python3 setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-scripts=%{_sbindir}
 %__mv %{buildroot}%{_sbindir}/init.py %{buildroot}%{_sbindir}/tiny-init
 
 
@@ -42,7 +51,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%exclude %{python_sitelib}/*
+%exclude %{python3_sitelib}/*
 %{_sbindir}/tiny-init
 
 
