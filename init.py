@@ -3,20 +3,30 @@
 """
 
 from __future__ import print_function
-import sys
-import os
+
+import argparse
 import errno
-import signal
 import logging
+import os
+import signal
+import sys
+
 import psutil
 
-if len(sys.argv) < 2:
-    print("usage: %s cmd [args]" % sys.argv[0])
-    sys.exit(1)
+cli = argparse.ArgumentParser()
+cli.add_argument('--debug', 
+                 action='store_const', dest='loglevel', 
+                 const=logging.DEBUG, default=logging.INFO, 
+                 help="Enable debug output")
+cli.add_argument('command')
+cli.add_argument('args', nargs=argparse.REMAINDER)
+args = cli.parse_args()
 
 FORMAT = '%(asctime)-15s init %(levelname)s: %(message)s'
-logging.basicConfig(level=logging.INFO, format=FORMAT)
+logging.basicConfig(level=args.loglevel, format=FORMAT)
 logger = logging.getLogger()
+
+logger.debug("command line args: %s", args)
 
 selfp = psutil.Process()
 logger.debug("my pid: %d", selfp.pid)
@@ -40,8 +50,9 @@ signal.signal(signal.SIGINT, sendtochilds)
 
 # Launch the command indicated in the command line.
 
-logger.debug("cmd: %s", " ".join(sys.argv[1:]))
-pid = os.spawnvp(os.P_NOWAIT, sys.argv[1], sys.argv[1:])
+command = [args.command, *args.args]
+logger.debug("cmd: %s", " ".join(command))
+pid = os.spawnvp(os.P_NOWAIT, args.command, command)
 logger.debug("cmd pid: %d", pid)
 
 
