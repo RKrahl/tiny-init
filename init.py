@@ -99,7 +99,7 @@ try:
     with filelock(args.lock):
 
         # Launch the command indicated in the command line.
-        command = [args.command, *args.args]
+        command = [args.command] + args.args
         logger.debug("cmd: %s", " ".join(command))
         pid = os.spawnvp(os.P_NOWAIT, args.command, command)
         logger.debug("cmd pid: %d", pid)
