@@ -12,7 +12,7 @@
 
 
 Name:		tiny-init
-Version:	0.2
+Version:	0.3
 Release:	1
 Summary:	Minimal implementation of an init process
 License:	Apache-2.0
