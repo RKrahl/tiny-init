@@ -20,7 +20,10 @@ cli.add_argument('--debug',
                  action='store_const', dest='loglevel', 
                  const=logging.DEBUG, default=logging.INFO, 
                  help="Enable debug output")
-cli.add_argument('--lock', help="Acquire an exclusive file lock")
+cli.add_argument('--lock-file', help="Acquire an exclusive file lock",
+                 metavar="FILENAME")
+cli.add_argument('--lock-content', help="Content to write into lock file",
+                 metavar="CONTENT")
 cli.add_argument('command')
 cli.add_argument('args', nargs=argparse.REMAINDER)
 args = cli.parse_args()
@@ -48,7 +51,7 @@ class filelock:
     This may either be used as a context manager or by calling the
     constructor and the release() method explicitly.
     """
-    def __init__(self, filename, mode=fcntl.LOCK_EX):
+    def __init__(self, filename, content=None, mode=fcntl.LOCK_EX):
         if filename:
             logger.debug("trying to lock %s ...", filename)
             self.fd = os.open(filename, os.O_RDWR | os.O_CREAT)
@@ -61,6 +64,9 @@ class filelock:
                     e = AlreadyLockedError(*e.args)
                 raise e
             logger.debug("lock on %s acquired.", filename)
+            if content and mode == fcntl.LOCK_EX:
+                os.ftruncate(self.fd, 0)
+                os.write(self.fd, content.encode('utf8'))
         else:
             self.fd = None
 
@@ -96,7 +102,7 @@ signal.signal(signal.SIGINT, sendtochilds)
 
 
 try:
-    with filelock(args.lock):
+    with filelock(args.lock_file, args.lock_content):
 
         # Launch the command indicated in the command line.
         command = [args.command] + args.args
@@ -118,5 +124,5 @@ try:
                 break
 
 except AlreadyLockedError:
-    logger.critical("lockfile %s is already locked.", args.lock)
+    logger.critical("lockfile %s is already locked.", args.lock_file)
     sys.exit(1)
