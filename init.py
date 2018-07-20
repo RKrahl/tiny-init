@@ -52,6 +52,7 @@ class filelock:
     constructor and the release() method explicitly.
     """
     def __init__(self, filename, content=None, mode=fcntl.LOCK_EX):
+        self._have_lock = False
         if filename:
             logger.debug("trying to lock %s ...", filename)
             self.fd = os.open(filename, os.O_RDWR | os.O_CREAT)
@@ -64,16 +65,20 @@ class filelock:
                     e = AlreadyLockedError(*e.args)
                 raise e
             logger.debug("lock on %s acquired.", filename)
+            self._have_lock = True
+            os.ftruncate(self.fd, 0)
             if content and mode == fcntl.LOCK_EX:
-                os.ftruncate(self.fd, 0)
                 os.write(self.fd, content.encode('utf8'))
         else:
             self.fd = None
 
     def release(self):
         if self.fd is not None:
+            if self._have_lock:
+                os.ftruncate(self.fd, 0)
             os.close(self.fd)
             self.fd = None
+            self._have_lock = False
 
     def __enter__(self):
         return self
