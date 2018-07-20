@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name = "tiny-init",
-    version = "0.3",
+    version = "0.4",
     description = "A minimal implementation of an init process",
     author = "Rolf Krahl",
     author_email = "rolf.krahl@helmholtz-berlin.de",
@@ -24,6 +24,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Development Status :: 4 - Beta",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: Apache Software License",
