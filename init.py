@@ -55,7 +55,7 @@ class filelock:
         self._have_lock = False
         if filename:
             logger.debug("trying to lock %s ...", filename)
-            self.fd = os.open(filename, os.O_RDWR | os.O_CREAT)
+            self.fd = os.open(filename, os.O_RDWR | os.O_CREAT, 0o666)
             try:
                 fcntl.lockf(self.fd, mode | fcntl.LOCK_NB)
             except Exception as e:
