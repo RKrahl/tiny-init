@@ -1,12 +1,9 @@
 %if 0%{?centos_version} || 0%{?rhel_version}
-%global python3_pkgversion 34
-%global py3_ver 3.4
+%global python3_pkgversion 36
 %else
 %global python3_pkgversion 3
-%global __python3 python3
-%if 0%{?fedora_version}
-%global py3_ver %(%{__python3} -c "import sys; sys.stdout.write(sys.version[:3])"
-)
+%if 0%{?sle_version} && 0%{?sle_version} < 150000
+%global __python3 /usr/bin/python3
 %endif
 %endif
 
@@ -20,7 +17,6 @@ Group:		System/Base
 Source:		%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python%{python3_pkgversion}-devel
-Requires:	python(abi) = %{py3_ver}
 Requires:	python%{python3_pkgversion}-psutil >= 2.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
