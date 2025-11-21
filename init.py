@@ -2,8 +2,6 @@
 """Tiny init tool.
 """
 
-from __future__ import print_function
-
 import argparse
 import errno
 import fcntl
