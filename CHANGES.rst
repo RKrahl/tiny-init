@@ -17,4 +17,4 @@ Internal changes
 
 + `#1`_: Review build tool chain.
 
-.. _#1: https://github.com/RKrahl/archive-tools/pull/1
+.. _#1: https://github.com/RKrahl/tiny-init/pull/1
