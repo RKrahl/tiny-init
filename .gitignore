@@ -1,3 +1,6 @@
+/.env
+/.local/
 /MANIFEST
+/_meta.py
 /build/
 /dist/

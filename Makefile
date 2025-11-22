@@ -1,4 +1,4 @@
-PYTHON   = python
+PYTHON   = python3
 
 
 build:
@@ -8,12 +8,15 @@ sdist:
 	$(PYTHON) setup.py sdist
 
 clean:
-	rm -f *~
 	rm -rf build
+	rm -rf __pycache__
 
 distclean: clean
-	rm -f MANIFEST
+	rm -f MANIFEST _meta.py
 	rm -rf dist
 
+meta:
+	$(PYTHON) setup.py meta
 
-.PHONY: build sdist clean distclean
+
+.PHONY: build sdist clean distclean meta
