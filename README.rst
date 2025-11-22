@@ -16,40 +16,34 @@ containers.
 System requirements
 -------------------
 
-+ Python 3.6 and newer.
+Python:
+
++ Python 3.6 or newer.
+
+Required library packages:
+
++ `setuptools`_
 
 + `psutil`_ >= 2.0
 
+Optional library packages:
 
-Installation
-------------
++ `git-props`_
 
-This package uses the distutils Python standard library package and
-follows its conventions of packaging source distributions.  See the
-documentation on `Installing Python Modules`_ for details or to
-customize the install process.  You typically want to install the init
-script into a system binary directory, use `--install-scripts` to
-override the default.
-
-1. Download the sources, unpack, and change into the source
-   directory.
-
-2. Install::
-
-     $ python setup.py install --install-scripts /usr/local/sbin
+  This package is used to extract some metadata such as the version
+  number out of git, the version control system.  All releases embed
+  that metadata in the distribution.  So this package is only needed
+  to build out of the plain development source tree as cloned from
+  GitHub, but not to build a release distribution.
 
 
 Copyright and License
 ---------------------
 
-Copyright 2016
-Helmholtz-Zentrum Berlin für Materialien und Energie GmbH
+Copyright 2016–2025 Rolf Krahl
 
-Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License.  You may
-obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the `Apache License`_, Version 2.0 (the "License"); you
+may not use this package except in compliance with the License.
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -58,5 +52,7 @@ implied.  See the License for the specific language governing
 permissions and limitations under the License.
 
 
+.. _setuptools: https://github.com/pypa/setuptools/
 .. _psutil: https://pypi.python.org/pypi/psutil/
-.. _Installing Python Modules: https://docs.python.org/2.7/install/
+.. _git-props: https://github.com/RKrahl/git-props
+.. _Apache License: https://www.apache.org/licenses/LICENSE-2.0

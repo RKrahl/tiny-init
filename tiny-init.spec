@@ -49,7 +49,8 @@ mv %{buildroot}%{_bindir}/init.py %{buildroot}%{_sbindir}/tiny-init
 
 %files
 %defattr(-,root,root)
-%doc README.rst
+%doc README.rst CHANGES.rst
+%license LICENSE.txt
 %exclude %{python3_sitelib}/*
 %{_sbindir}/tiny-init
 
