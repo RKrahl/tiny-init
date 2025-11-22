@@ -19,7 +19,9 @@ License:	Apache-2.0
 Group:		System/Base
 Source:		%{name}-%{version}.tar.gz
 BuildRequires:	python%{python3_pkgversion}-base >= 3.6
+BuildRequires:	python%{python3_pkgversion}-pip
 BuildRequires:	python%{python3_pkgversion}-setuptools
+BuildRequires:	python%{python3_pkgversion}-wheel
 Requires:	python%{python3_pkgversion}-psutil >= 2.0
 BuildArch:	noarch
 
@@ -36,12 +38,13 @@ terminated.  If the last child process is gone, it terminates itself.
 
 
 %build
-%__python3 setup.py build
+%pyproject_wheel
 
 
 %install
-%__python3 setup.py install --prefix=%{_prefix} --root=%{buildroot} --install-scripts=%{_sbindir}
-%__mv %{buildroot}%{_sbindir}/init.py %{buildroot}%{_sbindir}/tiny-init
+%pyproject_install
+install -d -m 755 %{buildroot}%{_sbindir}
+mv %{buildroot}%{_bindir}/init.py %{buildroot}%{_sbindir}/tiny-init
 
 
 %files
