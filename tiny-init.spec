@@ -1,5 +1,6 @@
-%if 0%{?suse_version} >= 1600 && 0%{?is_opensuse}
-%global python3_pkgversion 3
+%if 0%{?suse_version} >= 1600
+%global python3_pkgversion 313
+%global pythons python313
 %else
 %if 0%{?sle_version} >= 150500 && 0%{?is_opensuse}
 %global python3_pkgversion 311
