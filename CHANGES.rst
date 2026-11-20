@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+.. _changes-0_8_0:
+
+0.8 (2026-11-20)
+~~~~~~~~~~~~~~~~
+
+Internal changes
+----------------
+
++ `#2`_: Publish the package to PyPI
+
+.. _#2: https://github.com/RKrahl/tiny-init/pull/2
+
+
 .. _changes-0_7_0:
 
 0.7 (2025-11-23)
